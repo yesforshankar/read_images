@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Flask Base Tempalte With UI</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link href='http://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='main.css') }}">
+
+</head>
+
+<body>
+
+    <div class="message_holder"></div>
+
+    <section class="form-style-10">
+        <form action="/add" method="POST" name="li_form">
+
+            <div class="section"><span>*</span>Flask Base Template with UI</div>
+
+            <div class="inner-wrap">
+                <label>Value 1 <input type="text" name="name" /></label>
+            </div>
+
+            <div class="inner-wrap">
+                <label>Value 2 <input type="text" name="food" /></label>
+            </div>
+
+            <div class="inner-wrap">
+                <label>Value 3 <input type="text" name="rating" /></label>
+            </div>
+
+            <input type="submit" value="Add" />
+
+        </form>
+    </section>
+
+
+    {% if h_result %}
+    <section class="form-style-10" style="width:1000px;" id="result">
+
+        <table id="customers">
+            <tr>
+                <th>Name</th>
+                <th>Favourite Food</th>
+                <th>Likes rating</th>
+            </tr>
+            <tr>
+                <td>{{h_result.h_name}}</td>
+                <td>{{h_result.h_food}}</td>
+                <td>{{h_result.h_rating}}</td>
+            </tr>
+        </table>
+    </section>
+    {% endif %}
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+
+            console.log("ready!");
+
+
+
+        });
+    </script>
+
+</body>
+
+</html>
