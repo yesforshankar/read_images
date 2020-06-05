@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import itertools
 
-
-
 def split_line(text):
 
     # split the text
@@ -33,12 +31,6 @@ del(list_lang[-1])
 del(list_male[-1])
 del(list_female[-1])
 del(list_total[-1])
-
-print(list_lang)
-print(list_male)
-print(list_female)
-print(list_total)
-
 i=0
 # for item in itertools.chain(list_male, list_female):
 #     # Do something with each list item
@@ -49,27 +41,20 @@ i=0
 # print(sizes_gender)
  
 # Data to plot
-labels = list_lang
-sizes = list_total
-labels_gender = ['Male', 'Female']*len(list_male)
-sizes_gender = [*list_male,*list_female]
-print(len(list_female))
-print(labels_gender)
-print(sizes_gender)
-colors = ['#ff6666', '#ffcc99', '#99ff99', '#66b3ff']
-colors_gender = ['#c2c2f0','#ffb3e6', '#c2c2f0','#ffb3e6', '#c2c2f0','#ffb3e6', '#c2c2f0','#ffb3e6']
-explode = (0,0,0,0) 
-explode_gender = (0,0,0,0,0,0,0,0)
-#Plot
-texts=plt.pie(sizes, labels=labels, colors=colors, startangle=90,frame=True, explode=explode,radius=3)
-autotexts=plt.pie(sizes_gender,labels=labels_gender, colors=colors_gender,startangle=90, explode=explode_gender,radius=2 )
+fig, ax = plt.subplots()
 
+size = 0.3
+vals = np.array([[60., 32.], [37., 40.], [29., 10.]])
 
-#Draw circle
-centre_circle = plt.Circle((0,0),1.5,color='black', fc='white',linewidth=0)
-fig = plt.gcf()
-fig.gca().add_artist(centre_circle)
- 
-plt.axis('equal')
-plt.tight_layout()
+cmap = plt.get_cmap("tab20c")
+outer_colors = cmap(np.arange(3)*4)
+inner_colors = cmap(np.array([1, 2, 5, 6, 9, 10]))
+
+ax.pie(vals.sum(axis=1), radius=1, colors=outer_colors,
+       wedgeprops=dict(width=size, edgecolor='w'))
+
+ax.pie(vals.flatten(), radius=1-size, colors=inner_colors,
+       wedgeprops=dict(width=size, edgecolor='w'))
+
+ax.set(aspect="equal", title='Pie plot with `ax.pie`')
 plt.show()
